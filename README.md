@@ -11,6 +11,10 @@ Antes de executar o script, certifique-se de que:
 1. Você tem permissões de leitura e escrita no diretório que está sendo salvo no backup.
 2. Você tem a ferramenta `gdrive` instalada e configurada em seu sistema.
 
+Para instalar a ferramenta `gdrive`, acesse o link:
+
+[Repositório](https://github.com/glotlabs/gdrive#requirements)
+
 ### Executando o Script
 
 Para executar o script, você pode usar o seguinte comando no terminal:
