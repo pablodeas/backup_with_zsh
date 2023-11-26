@@ -1,21 +1,51 @@
-## Backup de Diretórios
+## Sobre o Projeto
 
-### Descrição
-Este script é usado para criar um backup de um diretório específico em um sistema Linux. Ele usa os comandos `rsync` e `tar` para fazer o backup e compactá-lo em um arquivo .tar.gz.
+Este é um script de backup que faz backup de um diretório específico, compacta o backup e o envia para o Google Drive.
 
-### Como Executar o Script
-Para executar este script, você precisa ter permissões de leitura no diretório que está sendo feito backup e permissões de gravação no diretório de destino.
+## Como Utilizar
 
-Primeiro, navegue até o diretório onde o script está localizado. Em seguida, torne o script executável com o comando `chmod +x script.sh`, substituindo `script.sh` pelo nome do seu script.
+### Pré-requisitos
 
-Depois de tornar o script executável, você pode executá-lo com o comando `./script.sh`.
+Antes de executar o script, certifique-se de que:
 
-### Como o Script Funciona
-O script começa definindo as variáveis `bkp_directory`, `main_directory` e `data`. `bkp_directory` é o diretório onde o backup será salvo, `main_directory` é o diretório que será incluído no backup e `data` é a data atual, que será usada para nomear o arquivo de backup.
+1. Você tem permissões de leitura e escrita no diretório que está sendo salvo no backup.
+2. Você tem a ferramenta `gdrive` instalada e configurada em seu sistema.
 
-O script então executa o comando `rsync` para criar um backup do diretório `main_directory` no diretório `bkp_directory`, excluindo certos diretórios especificados. Se o backup for criado com sucesso, o script então compacta o backup usando o comando `tar`.
+### Executando o Script
 
-Se ocorrer um erro durante a criação do backup, o script exibe uma mensagem de erro.
+Para executar o script, você pode usar o seguinte comando no terminal:
 
-## Mensagens de Erro
-Se o script encontrar um erro durante a execução, ele exibirá uma mensagem de erro. A mensagem de erro indica que houve um erro ao criar o backup e sugere que você verifique os logs no arquivo especificado.
+```zsh
+./do_backup.zsh
+```
+
+No meu caso específico, eu utilizo da seguinte forma:
+
+```zsh
+sudo nohup ./do_backup.zsh > log_backup.txt 2>&1 &
+```
+
+Assim, o script é executado em segundo plano e salva os logs no arquivo `log_backup.txt`
+
+
+## Como Funciona
+
+O script funciona da seguinte maneira:
+
+1. O script faz backup do diretório especificado, excluindo certos subdiretórios.
+2. O backup é então compactado em um arquivo tar.gz.
+3. O arquivo de backup é enviado para o Google Drive usando a ferramenta `gdrive`.
+
+## Estrutura do Script
+
+O script é estruturado da seguinte maneira:
+
+- Define as variáveis para o diretório de backup, o diretório principal e o nome do arquivo de backup.
+- Verifica se o arquivo de backup já existe. Se existir, o script é interrompido.
+- Faz o backup do diretório principal para o diretório de backup.
+- Compacta o backup em um arquivo tar.gz.
+- Envia o arquivo de backup para o Google Drive.
+
+## Contribuição
+
+Contribuições são bem-vindas! Se você encontrar um bug ou tiver uma sugestão de melhoria, por favor, abra uma issue.
