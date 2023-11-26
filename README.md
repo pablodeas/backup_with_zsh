@@ -13,7 +13,7 @@ Antes de executar o script, certifique-se de que:
 
 Para instalar a ferramenta `gdrive`, acesse o link:
 
-[Repositório](https://github.com/glotlabs/gdrive#requirements)
+[Gdrive](https://github.com/glotlabs/gdrive)
 
 ### Executando o Script
 
