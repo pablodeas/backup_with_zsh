@@ -34,7 +34,7 @@ if [ -e $backup_file ]; then
 
   echo "*** Iniciando o upload para o Google Drive ***"
 
-  if gdrive upload $backup_file; then
+  if gdrive files upload $backup_file; then
     echo "*** Upload concluído com sucesso! ***"
   
   else
