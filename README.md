@@ -10,6 +10,7 @@ Antes de executar o script, certifique-se de que:
 
 1. Você tem permissões de leitura e escrita no diretório que está sendo salvo no backup.
 2. Você tem a ferramenta `gdrive` instalada e configurada em seu sistema.
+3. Você alterou os caminhos de origem e destino de forma que atenda ao que você necessita.
 
 Para instalar a ferramenta `gdrive`, acesse o link:
 

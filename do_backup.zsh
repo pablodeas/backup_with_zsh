@@ -13,36 +13,54 @@ data=$(date +%d-%m-%y)
 backup_file="$bkp_directory/backup_$data.tar.gz"
 
 # Cria o backup
+echo ""
 echo ">>> Iniciando Backup <<<"
+echo ""
 if rsync -av --progress --partial --append --append-verify --exclude='snap' --exclude='Downloads' --exclude='albiononline' --exclude='backup' $main_directory $bkp_directory; then
+  echo ""
   echo ">>> Backup Criado com Sucesso! <<<"
+  echo ""
 
   # Compactando o backup (apenas usar o --remove-files se tiver certeza, pois ele apaga os arquivos de origem)
   cd $bkp_directory
   
+  echo ""
   echo ">>> Iniciando Compactação <<<"
+  echo ""
   tar -czvf $backup_file * .
+  echo ""
   echo ">>> Backup Compactando com Sucesso! <<<"
+  echo ""
 
   # Envia o arquivo de log para /backup
   mv /home/pablodeas/Workspace/Projects/pessoal/do_backup/*.log /backup
 
 else
+  echo ""
   echo ">>> ERROR, verifique os logs <<<"
+  echo ""
 fi
 
 # Enviando o backup para o Google Drive
 if [ -e $backup_file ]; then
 
+  echo ""
   echo ">>> Iniciando o upload para o Google Drive <<<"
+  echo ""
 
   if gdrive files upload $backup_file; then
+    echo ""
     echo ">>> Upload concluído com sucesso! <<<"
+    echo ""
   
   else
+    echo ""
     echo ">>> ERROR, verifique os logs <<<"
+    echo ""
   fi
 
 else
+  echo ""
   echo ">>> ERROR, verifique os logs <<<"
+  echo ""
 fi
