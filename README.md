@@ -1,6 +1,6 @@
 ## Sobre o Projeto
 
-Este é um script de backup que faz backup de um diretório específico, compacta o backup e o envia para o Google Drive.
+Este é um script que faz backup de um diretório específico, compacta o backup e o envia para o Google Drive.
 
 ## Como Utilizar
 

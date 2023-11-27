@@ -12,14 +12,18 @@ data=$(date +%d-%m-%y)
 # Variável para verificar a existência do backup compactado
 backup_file="$bkp_directory/backup_$data.tar.gz"
 
+# Pasta a compactar
+compact_file="$bkp_directory/*"
+
 # Cria o backup
 echo "*** Iniciando Backup ***"
 if rsync -av --progress --partial --append --append-verify --exclude='snap' --exclude='Downloads' --exclude='albiononline' --exclude='backup' $main_directory $bkp_directory; then
   echo "*** Backup Criado com Sucesso! ***"
 
   # Compactando o backup (apenas usar o --remove-files se tiver certeza, pois ele apaga os arquivos de origem)
+  cd $bkp_directory
   echo "*** Iniciando Compactação ***"
-  tar -czvf $backup_file -C $main_directory .
+  tar -czvf $backup_file -C $compact_file .
   echo "*** Backup Compactando com Sucesso! ***"
 
   # Envia o arquivo de log para /backup
