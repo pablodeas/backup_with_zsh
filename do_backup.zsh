@@ -17,9 +17,9 @@ echo "*** Iniciando Backup ***"
 if rsync -av --progress --partial --append --append-verify --exclude='snap' --exclude='Downloads' --exclude='albiononline' --exclude='backup' $main_directory $bkp_directory; then
   echo "*** Backup Criado com Sucesso! ***"
 
-  # Compactando o backup
+  # Compactando o backup (apenas usar o --remove-files se tiver certeza, pois ele apaga os arquivos de origem)
   echo "*** Iniciando Compactação ***"
-  tar -czvf $backup_file --remove-files -C $main_directory .
+  tar -czvf $backup_file -C $main_directory .
   echo "*** Backup Compactando com Sucesso! ***"
 
   # Envia o arquivo de log para /backup
