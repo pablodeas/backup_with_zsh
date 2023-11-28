@@ -27,7 +27,7 @@ Para executar o script, você pode usar o seguinte comando no terminal:
 No meu caso específico, eu utilizo da seguinte forma:
 
 ```zsh
-sudo nohup ./do_backup.zsh > log_backup.txt 2>&1 &
+sudo ./do_backup.zsh > log_backup.txt 2>&1
 ```
 
 Assim, o script é executado em segundo plano e salva os logs no arquivo `log_backup.txt`

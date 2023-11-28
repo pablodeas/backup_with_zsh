@@ -4,7 +4,7 @@
 bkp_directory="/backup"
 
 # Pasta que está sendo salva no backup
-main_directory='/home/pablodeas'
+main_directory='/home/pablodeas/csharp'
 
 # Variável com a data de hoje para o nome do arquivo
 data=$(date +%d-%m-%y)
@@ -27,9 +27,9 @@ if rsync -av --progress --partial --append --append-verify --exclude='snap' --ex
   echo ""
   echo ">>> Iniciando Compactação <<<"
   echo ""
-  tar -czvf $backup_file * .
+  tar --remove-files -czvf $backup_file *
   echo ""
-  echo ">>> Backup Compactando com Sucesso! <<<"
+  echo ">>> Backup Compactado com Sucesso! <<<"
   echo ""
 
   # Envia o arquivo de log para /backup
@@ -37,30 +37,30 @@ if rsync -av --progress --partial --append --append-verify --exclude='snap' --ex
 
 else
   echo ""
-  echo ">>> ERROR, verifique os logs <<<"
+  echo ">>> ERRO durante o 1° bloco, verifique os logs <<<"
   echo ""
 fi
 
 # Enviando o backup para o Google Drive
-if [ -e $backup_file ]; then
+#if [ -e $backup_file ]; then
 
-  echo ""
-  echo ">>> Iniciando o upload para o Google Drive <<<"
-  echo ""
+#  echo ""
+#  echo ">>> Iniciando o upload para o Google Drive <<<"
+#  echo ""
 
-  if gdrive files upload $backup_file; then
-    echo ""
-    echo ">>> Upload concluído com sucesso! <<<"
-    echo ""
+#  if gdrive files upload $backup_file; then
+#    echo ""
+#    echo ">>> Upload concluído com sucesso! <<<"
+#    echo ""
   
-  else
-    echo ""
-    echo ">>> ERROR, verifique os logs <<<"
-    echo ""
-  fi
-
-else
-  echo ""
-  echo ">>> ERROR, verifique os logs <<<"
-  echo ""
-fi
+#  else
+#    echo ""
+#    echo ">>> ERRO no upload com o Google Drive, verifique os logs <<<"
+#    echo ""
+#  fi
+#
+#else
+#  echo ""
+#  echo ">>> ERRO no 2° bloco, talvez o arquivo não esteja correto, verifique os logs <<<"
+#  echo ""
+#fi
