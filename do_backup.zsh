@@ -16,7 +16,7 @@ backup_file="$bkp_directory/backup_$data.tar.gz"
 echo ""
 echo ">>> Iniciando Backup <<<"
 echo ""
-if rsync -av --progress --partial --append --append-verify --exclude='$main_directory/snap' --exclude='$main_directory/Downloads' --exclude='$main_directory/albiononline' --exclude='$main_directory/backup' $main_directory $bkp_directory; then
+if rsync -av --progress --partial --append --append-verify --exclude='snap' --exclude='powerlevel10k' --exclude='albiononline' --exclude='backup' $main_directory $bkp_directory; then
   echo ""
   echo ">>> Backup Criado com Sucesso! <<<"
   echo ""
