@@ -4,7 +4,7 @@
 bkp_directory="/backup"
 
 # Pasta que está sendo salva no backup
-main_directory='/home/pablodeas/csharp'
+main_directory='/home/pablodeas/'
 
 # Variável com a data de hoje para o nome do arquivo
 data=$(date +%d-%m-%y)
@@ -16,7 +16,7 @@ backup_file="$bkp_directory/backup_$data.tar.gz"
 echo ""
 echo ">>> Iniciando Backup <<<"
 echo ""
-if rsync -av --progress --partial --append --append-verify --exclude='snap' --exclude='Downloads' --exclude='albiononline' --exclude='backup' $main_directory $bkp_directory; then
+if rsync -av --progress --partial --append --append-verify --exclude='$main_directory/snap' --exclude='$main_directory/Downloads' --exclude='$main_directory/albiononline' --exclude='$main_directory/backup' $main_directory $bkp_directory; then
   echo ""
   echo ">>> Backup Criado com Sucesso! <<<"
   echo ""
@@ -37,30 +37,6 @@ if rsync -av --progress --partial --append --append-verify --exclude='snap' --ex
 
 else
   echo ""
-  echo ">>> ERRO durante o 1° bloco, verifique os logs <<<"
+  echo ">>> ERRO, verifique os logs <<<"
   echo ""
 fi
-
-# Enviando o backup para o Google Drive
-#if [ -e $backup_file ]; then
-
-#  echo ""
-#  echo ">>> Iniciando o upload para o Google Drive <<<"
-#  echo ""
-
-#  if gdrive files upload $backup_file; then
-#    echo ""
-#    echo ">>> Upload concluído com sucesso! <<<"
-#    echo ""
-  
-#  else
-#    echo ""
-#    echo ">>> ERRO no upload com o Google Drive, verifique os logs <<<"
-#    echo ""
-#  fi
-#
-#else
-#  echo ""
-#  echo ">>> ERRO no 2° bloco, talvez o arquivo não esteja correto, verifique os logs <<<"
-#  echo ""
-#fi
