@@ -27,19 +27,17 @@ Para executar o script, você pode usar o seguinte comando no terminal:
 No meu caso específico, eu utilizo da seguinte forma:
 
 ```zsh
-sudo ./do_backup.zsh > log_backup.txt 2>&1
+sudo ./do_backup.zsh > backup.log 2>&1
 ```
 
-Assim, o script é executado em segundo plano e salva os logs no arquivo `log_backup.txt`
-
+Assim, registrando os logs no arquivo backup.log.
 
 ## Como Funciona
 
 O script funciona da seguinte maneira:
 
 1. O script faz backup do diretório especificado, excluindo certos subdiretórios.
-2. O backup é então compactado em um arquivo tar.gz.
-3. O arquivo de backup é enviado para o Google Drive usando a ferramenta `gdrive`.
+2. Caso a compactação ocorra sem erros, o backup é então compactado em um arquivo tar.gz.
 
 ## Estrutura do Script
 
@@ -49,7 +47,6 @@ O script é estruturado da seguinte maneira:
 - Verifica se o arquivo de backup já existe. Se existir, o script é interrompido.
 - Faz o backup do diretório principal para o diretório de backup.
 - Compacta o backup em um arquivo tar.gz.
-- Envia o arquivo de backup para o Google Drive.
 
 ## Contribuição
 
