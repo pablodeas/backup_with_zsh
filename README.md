@@ -38,6 +38,7 @@ O script funciona da seguinte maneira:
 
 1. O script faz backup do diretório especificado, excluindo certos subdiretórios.
 2. Caso a compactação ocorra sem erros, o backup é então compactado em um arquivo tar.gz.
+3. Após, caso o arquivo exista, é feito o upload do mesmo para o Google Drive.
 
 ## Estrutura do Script
 
@@ -47,6 +48,7 @@ O script é estruturado da seguinte maneira:
 - Verifica se o arquivo de backup já existe. Se existir, o script é interrompido.
 - Faz o backup do diretório principal para o diretório de backup.
 - Compacta o backup em um arquivo tar.gz.
+- Envia para o Drive.
 
 ## Contribuição
 
