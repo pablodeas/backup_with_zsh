@@ -1,12 +1,17 @@
 #!/bin/zsh
 
-# Onde é salvo os arquivos e o backup compactado
+# Script Name:    do_backup.sh
+# Author:         Pablo Andrade
+# Created:        28/12/2023
+# Version:        0.5
+
+# Diretório de Backup
 bkp_directory="/backup"
-# Pasta que está sendo salva no backup
+# Diretório de Origem
 main_directory='/home/pablodeas'
-# Variável com a data de hoje para o nome do arquivo
+# Data atual
 data=$(date +%d-%m-%y)
-# Variável para verificar a existência do backup compactado
+# Variável nome backup
 backup_file="$bkp_directory/backup_$data.tar.gz"
 
 
@@ -24,8 +29,9 @@ else
   "
 fi
 
-
+# Muda para o diretório de backup
 cd $bkp_directory
+
 
 echo "
 >>> Iniciando Compactação <<<
