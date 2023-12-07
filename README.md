@@ -27,7 +27,7 @@ Para executar o script, você pode usar o seguinte comando no terminal:
 No meu caso específico, eu utilizo da seguinte forma:
 
 ```zsh
-sudo ./do_backup.zsh > backup.log 2>&1
+./do_backup.zsh > backup.log 2>&1
 ```
 
 Assim, registrando os logs no arquivo backup.log.
