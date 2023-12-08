@@ -34,5 +34,5 @@ Contribuições para este projeto são bem-vindas. Se você encontrar um bug ou 
 
 ## Badges
 
-![Zsh](https://img.shields.io/badge/Zsh-1.2-blue)
+![Zsh](https://img.shields.io/badge/Zsh-5.8-blue)
 ![Google Drive](https://img.shields.io/badge/Google%20Drive-v3.0.0-green)
