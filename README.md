@@ -24,10 +24,6 @@ Para executar o script de backup, use o comando `./do_backup.zsh`.
 
 Para executar o script de upload, use o comando `./do_upload.zsh`.
 
-## Licença
-
-Este projeto é de código aberto e licenciado sob a licença MIT.
-
 ## Contribuições
 
 Contribuições para este projeto são bem-vindas. Se você encontrar um bug ou tiver uma sugestão de melhoria, por favor, abra uma issue ou envie um pull request.
@@ -35,11 +31,6 @@ Contribuições para este projeto são bem-vindas. Se você encontrar um bug ou 
 ## Autores
 
 - Pablo Andrade
-
-## Histórico de versões
-
-- 0.1 (07/12/2023): Versão inicial
-- 0.5 (28/11/2023): Adição do script de backup
 
 ## Badges
 
