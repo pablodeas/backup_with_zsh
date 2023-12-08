@@ -1,55 +1,47 @@
-## Sobre o Projeto
+# Projeto de Backup e Upload
 
-Este é um script que faz backup de um diretório específico, compacta o backup e o envia para o Google Drive.
+Este projeto consiste em dois scripts em Zsh, `do_backup.zsh` e `do_upload.zsh`, que realizam tarefas de backup e upload de arquivos.
 
-## Como Utilizar
+## Descrição
 
-### Pré-requisitos
+O script `do_backup.zsh` realiza um backup do diretório especificado e compacta os arquivos em um arquivo .tar.gz. Ele também exclui certos diretórios do backup. Após a criação do backup, o script move os arquivos de log para o diretório de backup.
 
-Antes de executar o script, certifique-se de que:
+O script `do_upload.zsh` verifica se o diretório de backup existe e, em seguida, faz o upload de todos os arquivos no diretório de backup para o Google Drive usando o comando `gdrive files upload`.
 
-1. Você tem permissões de leitura e escrita no diretório que está sendo salvo no backup.
-2. Você tem a ferramenta `gdrive` instalada e configurada em seu sistema.
-3. Você alterou os caminhos de origem e destino de forma que atenda ao que você necessita.
+## Instalação
 
+Para usar esses scripts, você precisa ter o Zsh e o gdrive instalado em seu sistema. 
+O gdrive é uma ferramenta que permite interagir com o Google Drive a partir da linha de comando. 
 Para instalar a ferramenta `gdrive`, acesse o link:
 
 [Gdrive](https://github.com/glotlabs/gdrive)
 
-### Executando o Script
+## Uso
 
-Para executar o script, você pode usar o seguinte comando no terminal:
+Para usar os scripts, você precisa dar permissões de execução para eles. Você pode fazer isso usando o comando `chmod +x do_backup.zsh do_upload.zsh`.
 
-```zsh
-./do_backup.zsh
-```
+Para executar o script de backup, use o comando `./do_backup.zsh`.
 
-No meu caso específico, eu utilizo da seguinte forma:
+Para executar o script de upload, use o comando `./do_upload.zsh`.
 
-```zsh
-./do_backup.zsh > backup.log 2>&1
-```
+## Licença
 
-Assim, registrando os logs no arquivo backup.log.
+Este projeto é de código aberto e licenciado sob a licença MIT.
 
-## Como Funciona
+## Contribuições
 
-O script funciona da seguinte maneira:
+Contribuições para este projeto são bem-vindas. Se você encontrar um bug ou tiver uma sugestão de melhoria, por favor, abra uma issue ou envie um pull request.
 
-1. O script faz backup do diretório especificado, excluindo certos subdiretórios.
-2. Caso a compactação ocorra sem erros, o backup é então compactado em um arquivo tar.gz.
-3. Após, caso o arquivo exista, é feito o upload do mesmo para o Google Drive.
+## Autores
 
-## Estrutura do Script
+- Pablo Andrade
 
-O script é estruturado da seguinte maneira:
+## Histórico de versões
 
-- Define as variáveis para o diretório de backup, o diretório principal e o nome do arquivo de backup.
-- Verifica se o arquivo de backup já existe. Se existir, o script é interrompido.
-- Faz o backup do diretório principal para o diretório de backup.
-- Compacta o backup em um arquivo tar.gz.
-- Envia para o Drive.
+- 0.1 (07/12/2023): Versão inicial
+- 0.5 (28/11/2023): Adição do script de backup
 
-## Contribuição
+## Badges
 
-Contribuições são bem-vindas! Se você encontrar um bug ou tiver uma sugestão de melhoria, por favor, abra uma issue.
+![Zsh](https://img.shields.io/badge/Zsh-1.2-blue)
+![Google Drive](https://img.shields.io/badge/Google%20Drive-v3.0.0-green)
