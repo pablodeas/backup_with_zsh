@@ -2,3 +2,4 @@
 backup.log
 upload.log
 *.log
+homolog*

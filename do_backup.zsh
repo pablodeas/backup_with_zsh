@@ -16,6 +16,8 @@ main_directory='/home/pablodeas'
 data=$(date +%d-%m-%y)
 # Variável nome backup
 backup_file="$bkp_directory/backup_$data.tar.gz"
+# Diretório de log antigos
+log_dir="log_$data"
 
 
 echo "
@@ -55,27 +57,19 @@ else
   "
 fi
 
+# Guarda os logs em um diretório com a data atual
+if [ -e $backup_file ];then
 
-# Colocado em um script diferente
+  mkdir "$log_dir"
 
-#echo "
-#>>> Iniciando Upload do Backup <<<
-#"
-## Enviando o backup para o Google Drive
-#if [ -e $backup_file ];then
-#
-#  if gdrive files upload $backup_file; then
-#  echo "
-#  >>> Upload Concluído com Sucesso! <<<
-#  "
-#  else
-#    echo "
-#    >>> ERRO durante Upload <<<
-#    "
-#  fi
-#
-#else
-#  echo "
-#  >>> ERRO durante Upload <<<
-#  "
-#fi
+  cp *.log $log_dir
+
+  echo "
+  >> Logs guardados com Sucesso! <<<
+  "
+
+else
+  echo "
+  >>> ERRO durante o armazenamento dos logs <<<
+  "
+fi
