@@ -62,7 +62,7 @@ if [ -e $backup_file ];then
 
   mkdir "$log_dir"
 
-  cp *.log $log_dir
+  mv *.log $log_dir
 
   echo "
   >> Logs guardados com Sucesso! <<<
