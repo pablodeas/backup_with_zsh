@@ -11,7 +11,7 @@
 # Diretório de Backup
 bkp_directory="/backup"
 # Diretório de Origem
-main_directory='/home/pablodeas'
+main_directory='/home/pablodeas/Workspace'
 # Data atual
 data=$(date +%d-%m-%y)
 # Variável nome backup
