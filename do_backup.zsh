@@ -5,71 +5,41 @@
 # Created:        28/11/2023
 # Version:        0.5
 
+# To decompress
+#tar -xzvf $bkp_file
+
 # Debugging ON / OFF
 #set -x
 
-# Diretório de Backup
-bkp_directory="/backup"
-# Diretório de Origem
-main_directory='/home/pablodeas/Workspace'
-# Data atual
+# Variables
+main_dir="/home/pablodeas/Workspace"
+bkp_dir="/backup"
 data=$(date +%d-%m-%y)
-# Variável nome backup
-backup_file="$bkp_directory/backup_$data.tar.gz"
-# Diretório de log antigos
-log_dir="log_$data"
+bkp_file="$bkp_dir/backup_$data.tar.gz"
 
+# Backup
+function exec_bkp () {
+        echo "-> Iniciando Backup..."
+        rsync -av --progress --partial --append-verify $main_dir $bkp_dir > $bkp_dir/$data.log
+}
 
-echo "
->>> Iniciando Backup <<<
-"
-# Cria o backup
-if rsync -av --progress --partial --append --append-verify --exclude='snap' --exclude='powerlevel10k' --exclude='albiononline' --exclude='backup' $main_directory $bkp_directory; then
-  echo "
-  >>> Backup Criado com Sucesso! <<<
-  "
+# Compress
+function exec_compact () {
+        echo "-> Iniciando compactação..."
+        tar --remove-files -czvf $bkp_file *
+}
+
+# Execution
+if exec_bkp; then
+        echo "-> Backup executado com sucesso!"
 else
-  echo "
-  >>> ERRO durante a criação do backup <<<
-  "
+        echo "-> ERRO durante o backup."
 fi
 
+cd $bkp_dir
 
-# Muda para o diretório de backup
-cd $bkp_directory
-
-
-echo "
->>> Iniciando Compactação <<<
-"
-# Compactando o backup (apenas usar o --remove-files se tiver certeza, pois ele apaga os arquivos de origem)
-if tar --remove-files -czvf $backup_file *;then
-
-  # Envia o arquivo de log para /backup
-  mv /home/pablodeas/Workspace/Projects/pessoal/do_backup/*.log /backup
-
-  echo "
-  >>> Backup Compactado com Sucesso! <<<
-  "
+if exec_compact; then
+        echo "-> Compactado com sucesso!"
 else
-  echo "
-  >>> ERRO durante a compactação. <<<
-  "
-fi
-
-# Guarda os logs em um diretório com a data atual
-if [ -e $backup_file ];then
-
-  mkdir "$log_dir"
-
-  mv *.log $log_dir
-
-  echo "
-  >> Logs guardados com Sucesso! <<<
-  "
-
-else
-  echo "
-  >>> ERRO durante o armazenamento dos logs <<<
-  "
+        echo "-> ERRO durante a compactação."
 fi
