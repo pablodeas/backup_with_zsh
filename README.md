@@ -1,38 +1,29 @@
-# Projeto de Backup e Upload
+# Project Title: Automated Backup System
 
-Este projeto consiste em dois scripts em Zsh, `do_backup.zsh` e `do_upload.zsh`, que realizam tarefas de backup e upload de arquivos.
+This project consists of two main files: `config.sh` and `backup.zsh`. These scripts are designed to automate the process of backing up and compressing data from a specified directory to another directory.
 
-## Descrição
+## config.sh
+This is a configuration file that sets up environment variables for the backup process. It includes:
 
-O script `do_backup.zsh` realiza um backup do diretório especificado e compacta os arquivos em um arquivo .tar.gz. Ele também exclui certos diretórios do backup. Após a criação do backup, o script move os arquivos de log para o diretório de backup.
+- `data`: The current date formatted as DD-MM-YY.
+- `main_dir`: The directory to be backed up.
+- `bkp_dir`: The directory where the backup will be stored.
+- `bkp_file`: The name of the backup file.
 
-O script `do_upload.zsh` verifica se o diretório de backup existe e, em seguida, faz o upload de todos os arquivos no diretório de backup para o Google Drive usando o comando `gdrive files upload`.
+## backup.zsh
+This script performs the backup and compression operations. It includes:
 
-## Instalação
+- `exec_bkp()`: This function initiates the backup process using the `rsync` command. The `-a` flag enables archive mode, preserving symbolic links, file permissions, and other attributes. The `--progress` flag displays progress during the transfer. The `--partial` flag keeps partially transferred files, and `--append-verify` verifies the append operation. The source directory (`main_dir`) is backed up to the destination directory (`bkp_dir`), and the progress is logged in a file named after the current date in the backup directory [1].
 
-Para usar esses scripts, você precisa ter o Zsh e o gdrive instalado em seu sistema. 
-O gdrive é uma ferramenta que permite interagir com o Google Drive a partir da linha de comando. 
-Para instalar a ferramenta `gdrive`, acesse o link:
+- `exec_compact()`: This function initiates the compression of the backup directory. It uses the `tar` command with the `--remove-files` flag, which removes files after they are added to the archive. The `-c` flag creates a new archive, `-z` compresses the archive using gzip, `-v` verbosely lists the files processed, and `-f` specifies the archive file name [3].
 
-[Gdrive](https://github.com/glotlabs/gdrive)
+The script checks the success of the backup and compression processes, printing relevant messages. If any process fails, an error message is printed.
 
-## Uso
+## How to Use
+First, ensure that the `config.sh` and `backup.zsh` files have execute permissions. You can add execute permissions using the command `chmod +x filename`.
 
-Para usar os scripts, você precisa dar permissões de execução para eles. Você pode fazer isso usando o comando `chmod +x do_backup.zsh do_upload.zsh`.
+Then, run the `backup.zsh` script. If successful, a backup of the `main_dir` will be created in the `bkp_dir`, and the backup will be compressed into a `.tar.gz` file.
 
-Para executar o script de backup, use o comando `./do_backup.zsh`.
+Remember to replace the directories in the `config.sh` file with your actual directories before running the script.
 
-Para executar o script de upload, use o comando `./do_upload.zsh`.
-
-## Contribuições
-
-Contribuições para este projeto são bem-vindas. Se você encontrar um bug ou tiver uma sugestão de melhoria, por favor, abra uma issue ou envie um pull request.
-
-## Autores
-
-- Pablo Andrade
-
-## Badges
-
-![Zsh](https://img.shields.io/badge/Zsh-5.8-blue)
-![Google Drive](https://img.shields.io/badge/Google%20Drive-v3.0.0-green)
+Please note that these scripts are intended for use in a Unix-like environment where tools like `rsync` and `tar` are available.

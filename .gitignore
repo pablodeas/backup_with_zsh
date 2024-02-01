@@ -1,5 +1,8 @@
-# Arquivos de log
+# Configuration Archives
+
 backup.log
 upload.log
 *.log
 homolog*
+*.log
+config.*
