@@ -12,12 +12,12 @@
 #set -x
 
 # Variables
-source config.sh
+source /home/pablodeas/Workspace/Projects/pessoal/do_backup/config.sh
 
 # Backup
 function exec_bkp () {
         echo "-> Iniciando Backup..."
-        rsync -av --progress --partial --append-verify $main_dir $bkp_dir > $bkp_dir/$data.log
+        rsync -av --progress --partial --append-verify $main_dir $bkp_dir > $bkp_dir/rsync_$data.log
 }
 
 # Compress
