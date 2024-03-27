@@ -12,7 +12,8 @@
 #set -x
 
 # Variables
-source /home/pablodeas/Workspace/Projects/pessoal/do_backup/config.sh
+script_path="$(dirname "${BASH_SOURCE[0]}")"
+source $script_path/config.sh
 
 # Backup
 function exec_bkp () {
