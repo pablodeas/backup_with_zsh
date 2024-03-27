@@ -26,6 +26,9 @@ function exec_compact () {
         tar --remove-files -czvf $bkp_file *
 }
 
+# Delete past file
+rm -f $bkp_dir/backup_Workspace*
+
 # Execution
 if exec_bkp; then
         echo "-> Backup executado com sucesso!"
