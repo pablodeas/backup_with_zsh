@@ -27,7 +27,7 @@ function exec_compact () {
 }
 
 # Delete past file
-rm -f $bkp_dir/backup_Workspace*
+rm -f $bkp_last
 
 # Execution
 if exec_bkp; then
