@@ -3,29 +3,24 @@
 # Script Name:    do_upload.sh
 # Author:         Pablo Andrade
 # Created:        07/12/2023
-# Version:        0.1
+# Version:        0.2
 
 # Debugging ON / OFF
 #set -x
 
-# Diretório de backup
-backup_dir="/backup"
+# Variables
+script_path="$(dirname "${BASH_SOURCE[0]}")"
+source $script_path/config.sh
 
-if [ -e $backup_dir ];then
+# Upload
+func exec_upload () {
+  echo "-> Iniciando Upload"
+  rclone copy $bkp_dir $remote:/Backups/ -vv
+}
 
-  if gdrive files upload --recursive $backup_dir;then
-
-    echo "
-    >>> Upload com sucesso! <<<
-    "
-  else
-    echo "
-    >>> ERRO no upload <<<
-    "
-  fi
-
+# Execution
+if exec_upload; then
+  echo "-> Upload executado com Sucesso!"
 else
-  echo "
-  >>> ERRO na verificação do diretório de backup <<<
-  "
+  echo "-> ERRO durante o Upload"
 fi

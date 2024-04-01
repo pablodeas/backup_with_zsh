@@ -3,7 +3,7 @@
 # Script Name:  backup.zsh
 # Author:       Pablo Andrade
 # Created:      28/11/2023
-# Version:      1.0
+# Version:      1.1
 
 # To decompress
 #tar -xzvf $bkp_file
@@ -32,7 +32,7 @@ rm -f $bkp_last
 
 # Execution
 if exec_bkp; then
-        echo "-> Backup executado com sucesso!"
+        echo "-> Backup executado com Sucesso!"
 else
         echo "-> ERRO durante o backup."
 fi
