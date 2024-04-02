@@ -1,29 +1,87 @@
-# Project Title: Automated Backup System
+# Backup and Upload Scripts
 
-This project consists of two main files: `config.sh` and `backup.zsh`. These scripts are designed to automate the process of backing up and compressing data from a specified directory to another directory.
+This repository contains scripts for automating the backup and upload process of a specified directory. The scripts are written in Zsh and Bash, and they rely on external tools like `rsync`, `tar`, and `rclone` for their operations.
 
-## config.sh
-This is a configuration file that sets up environment variables for the backup process. It includes:
+## Table of Contents
 
-- `data`: The current date formatted as DD-MM-YY.
-- `main_dir`: The directory to be backed up.
+- [Backup Script](#backup-script)
+- [Upload Script](#upload-script)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+
+## Backup Script
+
+### `do_backup.zsh`
+
+This script is responsible for creating a backup of a specified directory. It uses `rsync` to synchronize files from the source directory to the backup directory and then compresses the backup directory into a `.tar.gz` file.
+
+#### Key Features:
+
+- **Backup**: Uses `rsync` to create a backup of the specified directory.
+- **Compression**: Compresses the backup directory into a `.tar.gz` file.
+- **Logging**: Logs the backup process to a file.
+
+#### Usage:
+
+1. Ensure the `config.sh` file is correctly set up with the source and backup directory paths.
+2. Make the script executable: `chmod +x do_backup.zsh`
+3. Run the script: `./do_backup.zsh`
+
+## Upload Script
+
+### `do_upload.zsh`
+
+This script uploads the backup file to a remote storage location using `rclone`. It's designed to work with any remote storage supported by `rclone`.
+
+#### Key Features:
+
+- **Upload**: Uses `rclone` to upload the backup file to a remote storage location.
+- **Logging**: Logs the upload process.
+
+#### Usage:
+
+1. Ensure the `config.sh` file is correctly set up with the remote storage configuration.
+2. Make the script executable: `chmod +x do_upload.zsh`
+3. Run the script: `./do_upload.zsh`
+
+## Configuration
+
+### `config.sh`
+
+This file contains the configuration for both the backup and upload scripts. It defines variables such as the source directory, backup directory, backup file name, remote storage configuration, and more.
+
+#### Key Variables:
+
+- `data`: The current date in `dd-mm-yy` format.
+- `main_dir`: The source directory to be backed up.
 - `bkp_dir`: The directory where the backup will be stored.
 - `bkp_file`: The name of the backup file.
+- `bkp_last`: The pattern to match the last backup file for deletion.
+- `remote`: The name of the remote storage configuration in `rclone`.
+- `project_dir`: The directory of the project.
 
-## backup.zsh
-This script performs the backup and compression operations. It includes:
+### `.gitignore`
 
-- `exec_bkp()`: This function initiates the backup process using the `rsync` command. The `-a` flag enables archive mode, preserving symbolic links, file permissions, and other attributes. The `--progress` flag displays progress during the transfer. The `--partial` flag keeps partially transferred files, and `--append-verify` verifies the append operation. The source directory (`main_dir`) is backed up to the destination directory (`bkp_dir`), and the progress is logged in a file named after the current date in the backup directory [1].
+This file specifies files and directories that should be ignored by Git. It includes log files, configuration files, and any files matching the `homolog*` pattern.
 
-- `exec_compact()`: This function initiates the compression of the backup directory. It uses the `tar` command with the `--remove-files` flag, which removes files after they are added to the archive. The `-c` flag creates a new archive, `-z` compresses the archive using gzip, `-v` verbosely lists the files processed, and `-f` specifies the archive file name [3].
+## Dependencies
 
-The script checks the success of the backup and compression processes, printing relevant messages. If any process fails, an error message is printed.
+- **Zsh**: The scripts are written in Zsh.
+- **Bash**: The configuration script (`config.sh`) is written in Bash.
+- **rsync**: Required for the backup process.
+- **tar**: Required for compressing the backup.
+- **rclone**: Required for the upload process.
 
-## How to Use
-First, ensure that the `config.sh` and `backup.zsh` files have execute permissions. You can add execute permissions using the command `chmod +x filename`.
+Ensure all dependencies are installed and configured correctly before running the scripts.
 
-Then, run the `backup.zsh` script. If successful, a backup of the `main_dir` will be created in the `bkp_dir`, and the backup will be compressed into a `.tar.gz` file.
-
-Remember to replace the directories in the `config.sh` file with your actual directories before running the script.
-
-Please note that these scripts are intended for use in a Unix-like environment where tools like `rsync` and `tar` are available.
+Citations:
+[1] https://github.com/wouterbles/rclone-backup
+[2] https://medium.com/nerd-for-tech/organize-and-auto-back-up-your-zshrc-files-to-github-364a262b3227
+[3] https://forum.rclone.org/t/ive-made-a-nice-backup-script-tutorial-for-rclone/4999
+[4] https://github.com/vncloudsco/rclonebackup
+[5] https://forum.rclone.org/t/backup-rclone-conf-on-github/20686
+[6] https://www.youtube.com/watch?v=AYZdnqchUOE
+[7] https://forum.rclone.org/t/backup-script-suitable-for-cron/44147
+[8] https://forum.rclone.org/t/rclone-copy-didnt-find-section-in-config-file/8531
+[9] https://formulae.brew.sh/formula/
