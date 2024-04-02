@@ -74,14 +74,3 @@ This file specifies files and directories that should be ignored by Git. It incl
 - **rclone**: Required for the upload process.
 
 Ensure all dependencies are installed and configured correctly before running the scripts.
-
-Citations:
-[1] https://github.com/wouterbles/rclone-backup
-[2] https://medium.com/nerd-for-tech/organize-and-auto-back-up-your-zshrc-files-to-github-364a262b3227
-[3] https://forum.rclone.org/t/ive-made-a-nice-backup-script-tutorial-for-rclone/4999
-[4] https://github.com/vncloudsco/rclonebackup
-[5] https://forum.rclone.org/t/backup-rclone-conf-on-github/20686
-[6] https://www.youtube.com/watch?v=AYZdnqchUOE
-[7] https://forum.rclone.org/t/backup-script-suitable-for-cron/44147
-[8] https://forum.rclone.org/t/rclone-copy-didnt-find-section-in-config-file/8531
-[9] https://formulae.brew.sh/formula/
