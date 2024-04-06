@@ -14,7 +14,7 @@ source $script_path/config.sh
 
 # Upload
 func exec_upload () {
-  echo "-> Iniciando Upload"
+  echo "-> Starting Upload..."
   rclone copy $bkp_dir $remote:/Backups/ -vv &> $project_log/rclone_$data.log
 
 	if [ $? -eq 0 ]; then
