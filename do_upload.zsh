@@ -15,12 +15,14 @@ source $script_path/config.sh
 # Upload
 func exec_upload () {
   echo "-> Iniciando Upload"
-  rclone copy $bkp_dir $remote:/Backups/ -vv
+  rclone copy $bkp_dir $remote:/Backups/ -vv &> $project_log/rclone_$data.log
+
+	if [ $? -eq 0 ]; then
+		echo $msg_sucess
+	else
+		echo $msg_error
+	fi
 }
 
 # Execution
-if exec_upload; then
-  echo "-> Upload executado com Sucesso!"
-else
-  echo "-> ERRO durante o Upload"
-fi
+exec_upload

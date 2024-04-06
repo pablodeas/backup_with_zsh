@@ -6,3 +6,4 @@ upload.log
 homolog*
 *.log
 config.*
+Logs/*

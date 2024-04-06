@@ -15,32 +15,62 @@
 script_path="$(dirname "${BASH_SOURCE[0]}")"
 source $script_path/config.sh
 
+# Remove Last Backup File
+function remove_last () {
+	echo " --- "
+	echo "-> Removendo último Backup!..."
+	echo " --- "
+	rm -f $bkp_last
+	
+	if [ $? -eq 0 ]; then
+		echo $msg_sucess
+	else
+		echo $msg_error
+	fi
+}
+
 # Backup
 function exec_bkp () {
-        echo "-> Iniciando Backup..."
-        rsync -av --progress --partial --append-verify $main_dir $bkp_dir > $bkp_dir/rsync_$data.log
+	echo " --- "
+	echo "-> Iniciando Backup..."
+	echo " --- "
+	rsync -av --progress --partial --append-verify $main_dir $bkp_dir &> $project_log/rsync_$data.log
+
+	if [ $? -eq 0 ]; then
+		echo $msg_sucess
+	else
+		echo $msg_error
+	fi
 }
 
 # Compress
 function exec_compact () {
-        echo "-> Iniciando compactação..."
-        tar --remove-files -czvf $bkp_file *
+    echo " --- "
+    echo "-> Iniciando compactação..."
+    echo " --- "
+    # Redireciona a saída de erro para um arquivo temporário
+    tar --remove-files -czvf $bkp_file * &> $project_log/tar_$data.log
+
+    # Verifica se a mensagem de alerta está presente no arquivo de log
+    if grep -q "File shrank by" $project_log/tar_$data.log; then
+        echo "-> Alerta: O arquivo foi compactado com sucesso, mas houve um alerta."
+        # Aqui você pode adicionar ações específicas para tratar o alerta
+    elif [ $? -eq 0 ]; then
+        echo $msg_sucess
+    else
+        echo $msg_error
+    fi
 }
 
-# Delete past file
-rm -f $bkp_last
 
 # Execution
-if exec_bkp; then
-        echo "-> Backup executado com Sucesso!"
-else
-        echo "-> ERRO durante o backup."
-fi
+#1
+remove_last
+
+#2
+exec_bkp
 
 cd $bkp_dir
 
-if exec_compact; then
-        echo "-> Compactado com sucesso!"
-else
-        echo "-> ERRO durante a compactação."
-fi
+#3
+exec_compact
