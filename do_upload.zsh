@@ -15,7 +15,7 @@ source $script_path/config.sh
 # Upload
 func exec_upload () {
   echo "-> Iniciando Upload"
-  rclone copy $bkp_dir $remote:/Backups/ -vv
+  rclone copy $bkp_dir $remote:/Backups/ -vv &> $project_dir/upload.log
 }
 
 # Execution

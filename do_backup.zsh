@@ -15,6 +15,12 @@
 script_path="$(dirname "${BASH_SOURCE[0]}")"
 source $script_path/config.sh
 
+# Remove Last Backup File
+function remove_last () {
+	echo "-> Apagando o último arquivo para iniciar o Backup!"
+	rm -rf $bkp_last &> $project_dir/remove_last.log
+}
+
 # Backup
 function exec_bkp () {
         echo "-> Iniciando Backup..."
@@ -27,10 +33,13 @@ function exec_compact () {
         tar --remove-files -czvf $bkp_file *
 }
 
-# Delete past file
-rm -f $bkp_last
-
 # Execution
+if remove_last; then
+	echo "-> Último arquivo apagado com sucesso!"
+else
+	echo "-> ERRO ao apagar último arquivo."
+fi
+
 if exec_bkp; then
         echo "-> Backup executado com Sucesso!"
 else
