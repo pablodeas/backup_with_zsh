@@ -9,8 +9,9 @@
 #set -x
 
 # Variables
-script_path="$(dirname "${BASH_SOURCE[0]}")"
-source $script_path/config.sh
+#script_path="$(dirname "${BASH_SOURCE[0]}")"
+project_directory="/home/pablodeas/Workspace/Projects/pessoal/do_backup"
+source "$project_directory/config.sh"
 
 # Upload
 func exec_upload () {
