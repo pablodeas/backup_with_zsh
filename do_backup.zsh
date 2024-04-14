@@ -5,15 +5,13 @@
 # Created:      28/11/2023
 # Version:      1.2
 
-# 
-# # To decompress
-# #tar -xzvf $bkp_file
-# 
-# # Debugging ON/OFF
-# #set -x
-# 
-# #script_path="$(dirname "${BASH_SOURCE[0]}")"
-# 
+# To decompress
+#tar -xzvf $bkp_file
+
+# Debugging ON/OFF
+set -x
+
+#script_path="$(dirname "${BASH_SOURCE[0]}")"
 
 # Variables
 project_directory="/home/pablodeas/Workspace/Projects/pessoal/do_backup"
@@ -24,7 +22,7 @@ function remove_last () {
 	echo " --- "
 	echo "-> Removing last Backup File!..."
 	echo " --- "
-	/usr/bin/rm -f $bkp_last 2>> $project_log/rm.log
+	/usr/bin/rm -f $bkp_last
 	
 	if [ $? -eq 0 ]; then
 		echo $msg_sucess
