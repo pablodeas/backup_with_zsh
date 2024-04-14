@@ -1,26 +1,28 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # Script Name:  backup.zsh
 # Author:       Pablo Andrade
 # Created:      28/11/2023
-# Version:      1.1
+# Version:      1.2
 
 # To decompress
 #tar -xzvf $bkp_file
 
 # Debugging ON/OFF
-#set -x
+set -x
+
+#script_path="$(dirname "${BASH_SOURCE[0]}")"
 
 # Variables
-script_path="$(dirname "${BASH_SOURCE[0]}")"
-source $script_path/config.sh
+project_directory="/home/pablodeas/Workspace/Projects/pessoal/do_backup"
+source "$project_directory/config.sh"
 
 # Remove Last Backup File
 function remove_last () {
 	echo " --- "
-	echo "-> Removendo último Backup!..."
+	echo "-> Removing last Backup File!..."
 	echo " --- "
-	rm -f $bkp_last
+	/usr/bin/rm -f $bkp_last
 	
 	if [ $? -eq 0 ]; then
 		echo $msg_sucess
@@ -32,7 +34,7 @@ function remove_last () {
 # Backup
 function exec_bkp () {
 	echo " --- "
-	echo "-> Iniciando Backup..."
+	echo "-> Starting Backup..."
 	echo " --- "
 	rsync -av --progress --partial --append-verify $main_dir $bkp_dir &> $project_log/rsync_$data.log
 
@@ -46,22 +48,18 @@ function exec_bkp () {
 # Compress
 function exec_compact () {
     echo " --- "
-    echo "-> Iniciando compactação..."
+    echo "-> Starting Compression..."
     echo " --- "
-    # Redireciona a saída de erro para um arquivo temporário
     tar --remove-files -czvf $bkp_file * &> $project_log/tar_$data.log
 
-    # Verifica se a mensagem de alerta está presente no arquivo de log
     if grep -q "File shrank by" $project_log/tar_$data.log; then
-        echo "-> Alerta: O arquivo foi compactado com sucesso, mas houve um alerta."
-        # Aqui você pode adicionar ações específicas para tratar o alerta
+        echo "-> Alert: The file was compressed Successfully, but there was an alert."
     elif [ $? -eq 0 ]; then
         echo $msg_sucess
     else
         echo $msg_error
     fi
 }
-
 
 # Execution
 #1
