@@ -63,7 +63,7 @@ function exec_compact () {
 
 # Execution
 #1
-remove_last
+#remove_last 
 
 #2
 exec_bkp
