@@ -9,7 +9,7 @@
 #tar -xzvf $bkp_file
 
 # Debugging ON/OFF
-set -x
+#set -x
 
 #script_path="$(dirname "${BASH_SOURCE[0]}")"
 
