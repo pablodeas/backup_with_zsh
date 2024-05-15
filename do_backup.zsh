@@ -14,7 +14,7 @@
 #script_path="$(dirname "${BASH_SOURCE[0]}")"
 
 # Variables
-project_directory="/home/pablodeas/Workspace/Projects/pessoal/do_backup"
+project_directory="/home/pablodeas/Projects/pessoal/do_backup"
 source "$project_directory/config.sh"
 
 # Remove Last Backup File
@@ -29,6 +29,20 @@ function remove_last () {
 	else
 		echo $msg_error
 	fi
+}
+
+# Remove Last Log Files
+function remove_logs () {
+  echo " --- "
+  echo "-> Removing last Log files..."
+  echo " --- "
+  find $project_log -type f -newermt $data -exec rm {} +
+
+  if [ $? -eq 0 ]; then
+    echo $msg_sucess
+  else
+    echo $msg_error
+  fi
 }
 
 # Backup
@@ -62,13 +76,13 @@ function exec_compact () {
 }
 
 # Execution
-#1
-#remove_last 
 
-#2
+#remove_last
+
+remove_logs
+
 exec_bkp
 
 cd $bkp_dir
 
-#3
 exec_compact
