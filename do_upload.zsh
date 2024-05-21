@@ -10,7 +10,7 @@
 
 # Variables
 #script_path="$(dirname "${BASH_SOURCE[0]}")"
-project_directory="/home/pablodeas/Workspace/Projects/pessoal/do_backup"
+project_directory="/home/pablodeas/Projects/pessoal/do_backup"
 source "$project_directory/config.sh"
 
 # Upload
