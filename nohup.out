@@ -1,0 +1,5 @@
+./do_autogui.py: 1: import: not found
+./do_autogui.py: 2: import: not found
+./do_autogui.py: 3: import: not found
+./do_autogui.py: 5: url: not found
+./do_autogui.py: 7: Syntax error: word unexpected (expecting ")")
