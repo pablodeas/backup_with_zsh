@@ -7,8 +7,8 @@ import sys
 
 url = 'https://drive.google.com/drive/u/0/folders/1p8mUT8iH6yaCZnxD_lmaSGymBHSK51h1'
 
-#if webbrowser.open(url):
-#    time.sleep(5)
+if webbrowser.open(url):
+    time.sleep(5)
 
 pyautogui.press('win')
 time.sleep(1)
@@ -23,7 +23,6 @@ try:
     img = pyautogui.locateCenterOnScreen('src/imgs/files.png', confidence=0.9)
 except:
     img = pyautogui.locateCenterOnScreen('src/imgs/files2.png', confidence=0.9)
-
 pyautogui.click(img.x, img.y)
 time.sleep(2)
 
@@ -39,17 +38,17 @@ pyautogui.click(img.x, img.y)
 
 time.sleep(2)
 try:
-    bkp_fl = pyautogui.locateOnScreen('src/imgs/backup.png', confidence=0.8)
+    bkp_fl = pyautogui.locateCenterOnScreen('src/imgs/backup.png', confidence=0.8)
 except Exception as e:
     print(f'> Não Encontrado: backup.png - {e}')
     sys.exit()
 
 try:
-    bkp_fd = pyautogui.locateOnScreen('src/imgs/backup_folder.png', confidence=0.8)
+    bkp_fd = pyautogui.locateCenterOnScreen('src/imgs/backup_folder.png', confidence=0.8)
 except Exception as e:
     print(f'> Não Encontrado: backup_folder.png - {e}')
     sys.exit()
 
-pyautogui.dragTo(bkp_fl.x, bkp_fl.y, 3, button='left')
-pyautogui.dragTo(bkp_fd.x, bkp_fd.y, 3, button='left')
+pyautogui.dragTo(bkp_fl.x, bkp_fl.y, 2)
+pyautogui.dragTo(bkp_fd.x, bkp_fd.y, 2, button='left')
 
