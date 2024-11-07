@@ -3,15 +3,10 @@
 # Script Name:  backup.zsh
 # Author:       Pablo Andrade
 # Created:      28/11/2023
-# Version:      1.2
+# Version:      1.3 [ remove_last fixed. ]
 
-# To decompress
-#tar -xzvf $bkp_file
-
-# Debugging ON/OFF
-#set -x
-
-#script_path="$(dirname "${BASH_SOURCE[0]}")"
+#tar -xzvf $bkp_file [ To decompress ]
+#set -x [ For Debbug Mode, decomment this line and remove this comment.]
 
 # Variables
 project_directory="/home/pablodeas/Projects/pessoal/do_backup"
@@ -66,23 +61,17 @@ function exec_compact () {
     echo " --- "
     tar --remove-files -czvf $bkp_file * &> $project_log/tar_$data.log
 
-    if grep -q "File shrank by" $project_log/tar_$data.log; then
-        echo "-> Alert: The file was compressed Successfully, but there was an alert."
-    elif [ $? -eq 0 ]; then
-        echo $msg_sucess
-    else
-        echo $msg_error
-    fi
+  if [ $? -eq 0 ]; then
+    echo $msg_sucess
+  else
+    echo $msg_error
+  fi
 }
 
 # Execution
 
-#remove_last
-
+remove_last
 remove_logs
-
 exec_bkp
-
 cd $bkp_dir
-
 exec_compact

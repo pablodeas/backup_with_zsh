@@ -1,22 +1,36 @@
 #!/bin/zsh
 
-# Script Name:    do_upload.sh
-# Author:         Pablo Andrade
-# Created:        07/12/2023
-# Version:        0.2
+# Script Name:    	do_upload.sh
+# Author:         	Pablo Andrade
+# Created:			07/12/2023
+# Change:			07/11/2024 [ New function, policy_remove ]
+# Version:        	0.3
 
-# Debugging ON / OFF
-#set -x
+#set -x [ For Debbug Mode, decomment this line and remove this comment.]
 
-# Variables
-#script_path="$(dirname "${BASH_SOURCE[0]}")"
-project_directory="/home/pablodeas/Workspace/Projects/pessoal/do_backup"
+project_directory="/home/pablodeas/Projects/pessoal/do_backup"
 source "$project_directory/config.sh"
+
+# Remove Old
+func policy_remove () {
+	echo "---"
+	echo "-> Removing Backup from 3 Days..."
+	echo "---"
+	rclone deletefile $remote:/Backup/$bkp_remote_delete -vv
+	
+	if [ $? -eq 0 ]; then
+		echo $msg_sucess
+	else
+		echo $msg_error
+	fi
+}
 
 # Upload
 func exec_upload () {
-  echo "-> Starting Upload..."
-  rclone copy $bkp_dir $remote:/Backups/ -vv &> $project_log/rclone_$data.log
+	echo "---"
+	echo "-> Starting Upload..."
+	echo "---"
+	rclone copy $bkp_dir $remote:/Backups/ -vv
 
 	if [ $? -eq 0 ]; then
 		echo $msg_sucess
@@ -26,4 +40,5 @@ func exec_upload () {
 }
 
 # Execution
-exec_upload
+policy_remove &> $project_log/rclone_$data.log
+exec_upload &>> $project_log/rclone_$data.log
