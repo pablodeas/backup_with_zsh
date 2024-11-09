@@ -17,7 +17,7 @@ function remove_last () {
 	echo " --- "
 	echo "-> Removing last Backup File!..."
 	echo " --- "
-	/usr/bin/rm -f $bkp_last
+	find $bkp_last -type f -exec rm {} +
 	
 	if [ $? -eq 0 ]; then
 		echo $msg_sucess
@@ -45,7 +45,7 @@ function exec_bkp () {
 	echo " --- "
 	echo "-> Starting Backup..."
 	echo " --- "
-	rsync -av --progress --partial --append-verify $main_dir $bkp_dir &> $project_log/rsync_$data.log
+	rsync -av --partial --append-verify $main_dir $bkp_dir
 
 	if [ $? -eq 0 ]; then
 		echo $msg_sucess
@@ -59,19 +59,19 @@ function exec_compact () {
     echo " --- "
     echo "-> Starting Compression..."
     echo " --- "
-    tar --remove-files -czvf $bkp_file * &> $project_log/tar_$data.log
+    tar --remove-files -czvf $bkp_file *
 
-  if [ $? -eq 0 ]; then
-    echo $msg_sucess
-  else
-    echo $msg_error
-  fi
+    if [ $? -eq 0 ]; then
+      echo $msg_sucess
+    else
+      echo $msg_error
+    fi
 }
 
 # Execution
 
-remove_last
+#remove_last
 remove_logs
-exec_bkp
+exec_bkp &> $project_log/rsync_$data.log
 cd $bkp_dir
-exec_compact
+exec_compact &> $project_log/tar_$data.log

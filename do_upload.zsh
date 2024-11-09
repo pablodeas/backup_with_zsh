@@ -16,7 +16,7 @@ func policy_remove () {
 	echo "---"
 	echo "-> Removing Backup from 3 Days..."
 	echo "---"
-	rclone deletefile $remote:/Backup/$bkp_remote_delete -vv
+	rclone deletefile $remote:/Backups/$bkp_remote_delete -vv
 	
 	if [ $? -eq 0 ]; then
 		echo $msg_sucess

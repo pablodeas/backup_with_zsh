@@ -9,3 +9,5 @@ config.*
 Logs/*
 .id*
 id*
+test*
+test.sh
