@@ -31,7 +31,7 @@ function remove_logs () {
   echo " --- "
   echo "-> Removing last Log files..."
   echo " --- "
-  find $project_log -type f -newermt $data -exec rm {} +
+  find $project_log -type f -mtime +3 -delete
 
   if [ $? -eq 0 ]; then
     echo $msg_sucess
